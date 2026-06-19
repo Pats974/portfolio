@@ -190,4 +190,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // ── Protection basique des images (clic droit / drag) ─
+  // Dissuasion simple, pas une protection absolue — n'affecte ni le clic
+  // (lightbox, navigation) ni la sélection de texte ailleurs sur le site.
+  document.querySelectorAll('img').forEach(img => {
+    img.setAttribute('draggable', 'false');
+    img.addEventListener('contextmenu', (e) => e.preventDefault());
+    img.addEventListener('dragstart', (e) => e.preventDefault());
+  });
+
 });
