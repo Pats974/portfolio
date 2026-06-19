@@ -1036,7 +1036,7 @@ nav ul li a.active::before {
 footer {
   background: var(--black);
   border-top: 1px solid var(--grey-dark);
-  padding: 28px 64px;
+  padding: 40px 64px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1047,7 +1047,7 @@ footer {
   font-size: 0.65rem;
   letter-spacing: 0.02em;
   color: var(--grey-dark);
-  line-height: 1.6;
+  line-height: 1.8;
   max-width: 560px;
 }
 
@@ -1304,5 +1304,5 @@ footer {
 
   .contact-cta-wrap { margin-top: 28px; }
 
-  footer { padding: 24px 28px; flex-direction: column; gap: 8px; text-align: center; }
+  footer { padding: 32px 28px; flex-direction: column; gap: 12px; text-align: center; }
 }
