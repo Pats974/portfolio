@@ -853,6 +853,19 @@ nav ul li a.active::before {
   font-size: 0.72rem;
   letter-spacing: 0.1em;
   color: var(--accent);
+  white-space: nowrap;
+  margin-left: 24px;
+}
+
+.tirages-list-custom {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--grey-mid);
+}
+
+.tirages-list-custom .tirages-list-price {
+  font-style: normal;
 }
 
 .tirages-finish {
