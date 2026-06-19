@@ -135,23 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   lightboxImg.style.transition = 'opacity 0.2s ease';
 
-  // ── Contact form ──────────────────────────────────────
-  const form = document.getElementById('contact-form');
-  form?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const btn = form.querySelector('.submit-btn');
-    const originalText = btn.childNodes[0].textContent;
-    btn.childNodes[0].textContent = 'Message envoyé ';
-    btn.style.borderColor = 'var(--accent)';
-    btn.style.color = 'var(--accent)';
-    setTimeout(() => {
-      btn.childNodes[0].textContent = originalText;
-      btn.style.borderColor = '';
-      btn.style.color = '';
-      form.reset();
-    }, 3000);
-  });
-
   // ── Séries : glisser-déposer + molette = défilement horizontal ─
   document.querySelectorAll('.series-photos-track').forEach(track => {
     let isDown = false, startX = 0, startScroll = 0, moved = false;
