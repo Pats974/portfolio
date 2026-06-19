@@ -749,43 +749,66 @@ nav ul li a.active::before {
 
 .series-link:hover { color: var(--accent); gap: 20px; }
 
-/* Bande horizontale pleine largeur — hauteur fixe, formats respectés */
-.series-photos {
-  position: relative;
-}
-
-.series-photos-track {
-  display: flex;
+/* Grille responsive — remplace l'ancien défilement horizontal */
+.series-photos-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 4px;
   padding: 0 64px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  scroll-snap-type: x mandatory;
-  scroll-padding-left: 64px;
-  cursor: grab;
 }
 
-.series-photos-track::-webkit-scrollbar { display: none; }
-
 .series-photo {
-  flex: 0 0 auto;
-  height: 460px;
-  scroll-snap-align: start;
   position: relative;
+  aspect-ratio: 3 / 4;
   overflow: hidden;
   cursor: pointer;
   background: var(--grey-light);
 }
 
 .series-photo img {
-  width: auto;
+  width: 100%;
   height: 100%;
   display: block;
+  object-fit: cover;
   transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .series-photo:hover img { transform: scale(1.04); }
+
+/* Au-delà de 8 photos, masquées par défaut — révélées via "Voir plus" */
+.series-photos-grid .series-photo:nth-child(n+9) { display: none; }
+.series-photos-grid.expanded .series-photo:nth-child(n+9) { display: block; }
+
+.series-show-more {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 32px auto 0;
+  padding: 14px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--black);
+  transition: color var(--transition-fast);
+}
+
+.series-show-more::after {
+  content: '↓';
+  transition: transform var(--transition-fast);
+}
+
+.series-show-more.expanded::after { transform: rotate(180deg); }
+
+.series-show-more-count {
+  color: var(--grey-mid);
+  letter-spacing: 0.05em;
+}
+
+.series-show-more:hover { color: var(--accent); }
 
 /* ============================================
    TIRAGES / IMPRESSION SECTION
@@ -1173,6 +1196,7 @@ footer {
   #contact { gap: 60px; padding: 80px 48px; }
 
   .gallery-grid { column-count: 2; }
+  .series-photos-grid { grid-template-columns: repeat(2, 1fr); padding: 0 48px; }
 }
 
 /* ============================================
@@ -1263,8 +1287,8 @@ footer {
   }
 
   .series-number { font-size: 3rem; }
-  .series-photos-track { padding: 0 24px; scroll-padding-left: 24px; }
-  .series-photo { height: 300px; }
+  .series-photos-grid { grid-template-columns: repeat(2, 1fr); padding: 0 24px; gap: 3px; }
+  .series-show-more { margin-top: 24px; }
 
   /* Tirages mobile */
   #tirages { padding: 64px 24px; }

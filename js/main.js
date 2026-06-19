@@ -135,52 +135,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
   lightboxImg.style.transition = 'opacity 0.2s ease';
 
-  // ── Séries : glisser-déposer + molette = défilement horizontal ─
-  document.querySelectorAll('.series-photos-track').forEach(track => {
-    let isDown = false, startX = 0, startScroll = 0, moved = false;
-
-    track.addEventListener('pointerdown', (e) => {
-      isDown = true; moved = false;
-      startX = e.clientX;
-      startScroll = track.scrollLeft;
-      track.style.cursor = 'grabbing';
+  // ── Séries : "Voir plus / Réduire" pour les grilles longues ─
+  document.querySelectorAll('.series-show-more').forEach(btn => {
+    const grid = btn.previousElementSibling;
+    const countEl = btn.querySelector('.series-show-more-count');
+    const originalCount = countEl ? countEl.textContent : '';
+    btn.addEventListener('click', () => {
+      const expanded = grid.classList.toggle('expanded');
+      btn.classList.toggle('expanded', expanded);
+      btn.firstChild.textContent = expanded ? 'Réduire ' : 'Voir plus';
+      if (countEl) countEl.textContent = expanded ? '' : originalCount;
     });
-    track.addEventListener('pointermove', (e) => {
-      if (!isDown) return;
-      const dx = e.clientX - startX;
-      if (Math.abs(dx) > 6) moved = true;
-      track.scrollLeft = startScroll - dx;
-    });
-    const end = () => { isDown = false; track.style.cursor = ''; };
-    track.addEventListener('pointerup', end);
-    track.addEventListener('pointerleave', end);
-    track.addEventListener('pointercancel', end);
-
-    // Empêche l'ouverture de la lightbox si on a glissé
-    track.addEventListener('click', (e) => {
-      if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; }
-    }, true);
-
-    // Molette verticale → défilement horizontal
-    track.addEventListener('wheel', (e) => {
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        track.scrollLeft += e.deltaY;
-        e.preventDefault();
-      }
-    }, { passive: false });
   });
 
-  // ── "Voir la série" → active le filtre correspondant ─
+  // ── "Voir la série" → active le filtre et défile vers les photos ─
   document.querySelectorAll('[data-filter-link]').forEach(link => {
-    link.addEventListener('click', () => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
       const cat = link.dataset.filterLink;
       const btn = document.querySelector('.filter-btn[data-filter="' + cat + '"]');
       if (btn) btn.click();
+      const grid = document.querySelector('.gallery-grid');
+      (grid || document.getElementById('gallery')).scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
 
-  // ── Smooth scroll for all hash links ─────────────────
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
+  // ── Smooth scroll for all other hash links ───────────
+  document.querySelectorAll('a[href^="#"]:not([data-filter-link])').forEach(link => {
     link.addEventListener('click', (e) => {
       const target = document.querySelector(link.getAttribute('href'));
       if (target) {
