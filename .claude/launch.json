@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "portfolio",
+      "runtimeExecutable": "sh",
+      "runtimeArgs": ["-c", "cd /tmp/pf && exec ruby -run -e httpd . -p 8080"],
+      "port": 8080
+    }
+  ]
+}

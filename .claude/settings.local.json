@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /Users/patrice/Documents/Portfolio/.claude)",
+      "Bash(kill 86824)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(which npx; which node; which python3; ls /usr/local/bin/)",
+      "mcp__Claude_in_Chrome__navigate",
+      "mcp__visualize__read_me",
+      "mcp__visualize__show_widget"
+    ]
+  }
+}
