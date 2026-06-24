@@ -1038,7 +1038,7 @@ footer {
   border-top: 1px solid var(--grey-dark);
   padding: 40px 64px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 40px;
 }
@@ -1047,8 +1047,9 @@ footer {
   font-size: 0.65rem;
   letter-spacing: 0.02em;
   color: var(--grey-dark);
-  line-height: 1.8;
+  line-height: 2;
   max-width: 560px;
+  padding: 6px 0;
 }
 
 .footer-tagline {
@@ -1304,5 +1305,5 @@ footer {
 
   .contact-cta-wrap { margin-top: 28px; }
 
-  footer { padding: 32px 28px; flex-direction: column; gap: 12px; text-align: center; }
+  footer { padding: 32px 28px; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
 }
