@@ -1036,6 +1036,7 @@ nav ul li a.active::before {
 footer {
   background: var(--black);
   border-top: 1px solid var(--grey-dark);
+  margin-left: var(--sidebar-w);
   padding: 40px 64px;
   display: flex;
   align-items: flex-start;
@@ -1207,6 +1208,7 @@ footer {
   #sidebar { display: none; }
   #mobile-header { display: flex; }
   #main { margin-left: 0; padding-top: 60px; }
+  footer { margin-left: 0; }
 
   /* Hero mobile */
   #hero {
